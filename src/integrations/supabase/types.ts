@@ -14,16 +14,562 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      announcement_reads: {
+        Row: {
+          announcement_id: string
+          read_at: string
+          user_id: string
+        }
+        Insert: {
+          announcement_id: string
+          read_at?: string
+          user_id?: string
+        }
+        Update: {
+          announcement_id?: string
+          read_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "announcement_reads_announcement_id_fkey"
+            columns: ["announcement_id"]
+            isOneToOne: false
+            referencedRelation: "announcements"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      announcements: {
+        Row: {
+          author_id: string | null
+          body: string
+          category: Database["public"]["Enums"]["announcement_category"]
+          created_at: string
+          id: string
+          published: boolean
+          published_at: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author_id?: string | null
+          body: string
+          category?: Database["public"]["Enums"]["announcement_category"]
+          created_at?: string
+          id?: string
+          published?: boolean
+          published_at?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author_id?: string | null
+          body?: string
+          category?: Database["public"]["Enums"]["announcement_category"]
+          created_at?: string
+          id?: string
+          published?: boolean
+          published_at?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      assignments: {
+        Row: {
+          created_at: string
+          description: string | null
+          due_at: string
+          id: string
+          is_demo: boolean
+          priority: Database["public"]["Enums"]["priority_level"]
+          status: Database["public"]["Enums"]["assignment_status"]
+          subject_id: string | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          due_at: string
+          id?: string
+          is_demo?: boolean
+          priority?: Database["public"]["Enums"]["priority_level"]
+          status?: Database["public"]["Enums"]["assignment_status"]
+          subject_id?: string | null
+          title: string
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          due_at?: string
+          id?: string
+          is_demo?: boolean
+          priority?: Database["public"]["Enums"]["priority_level"]
+          status?: Database["public"]["Enums"]["assignment_status"]
+          subject_id?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "assignments_subject_id_fkey"
+            columns: ["subject_id"]
+            isOneToOne: false
+            referencedRelation: "subjects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      attendance_records: {
+        Row: {
+          created_at: string
+          date: string
+          id: string
+          is_demo: boolean
+          note: string | null
+          status: Database["public"]["Enums"]["attendance_status"]
+          subject_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          date: string
+          id?: string
+          is_demo?: boolean
+          note?: string | null
+          status: Database["public"]["Enums"]["attendance_status"]
+          subject_id: string
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          id?: string
+          is_demo?: boolean
+          note?: string | null
+          status?: Database["public"]["Enums"]["attendance_status"]
+          subject_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "attendance_records_subject_id_fkey"
+            columns: ["subject_id"]
+            isOneToOne: false
+            referencedRelation: "subjects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      exams: {
+        Row: {
+          created_at: string
+          duration_minutes: number | null
+          exam_type: Database["public"]["Enums"]["exam_type"]
+          id: string
+          is_demo: boolean
+          name: string
+          room: string | null
+          starts_at: string
+          subject_id: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          duration_minutes?: number | null
+          exam_type?: Database["public"]["Enums"]["exam_type"]
+          id?: string
+          is_demo?: boolean
+          name: string
+          room?: string | null
+          starts_at: string
+          subject_id?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          duration_minutes?: number | null
+          exam_type?: Database["public"]["Enums"]["exam_type"]
+          id?: string
+          is_demo?: boolean
+          name?: string
+          room?: string | null
+          starts_at?: string
+          subject_id?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "exams_subject_id_fkey"
+            columns: ["subject_id"]
+            isOneToOne: false
+            referencedRelation: "subjects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notes: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          is_demo: boolean
+          pinned: boolean
+          subject_id: string | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content?: string
+          created_at?: string
+          id?: string
+          is_demo?: boolean
+          pinned?: boolean
+          subject_id?: string | null
+          title: string
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          is_demo?: boolean
+          pinned?: boolean
+          subject_id?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notes_subject_id_fkey"
+            columns: ["subject_id"]
+            isOneToOne: false
+            referencedRelation: "subjects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notifications: {
+        Row: {
+          body: string | null
+          created_at: string
+          dedupe_key: string
+          id: string
+          kind: string
+          link: string | null
+          read_at: string | null
+          title: string
+          user_id: string
+        }
+        Insert: {
+          body?: string | null
+          created_at?: string
+          dedupe_key: string
+          id?: string
+          kind: string
+          link?: string | null
+          read_at?: string | null
+          title: string
+          user_id: string
+        }
+        Update: {
+          body?: string | null
+          created_at?: string
+          dedupe_key?: string
+          id?: string
+          kind?: string
+          link?: string | null
+          read_at?: string | null
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      performance_records: {
+        Row: {
+          assessed_on: string
+          created_at: string
+          id: string
+          is_demo: boolean
+          max_score: number
+          score: number
+          subject_id: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          assessed_on: string
+          created_at?: string
+          id?: string
+          is_demo?: boolean
+          max_score: number
+          score: number
+          subject_id: string
+          title: string
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          assessed_on?: string
+          created_at?: string
+          id?: string
+          is_demo?: boolean
+          max_score?: number
+          score?: number
+          subject_id?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "performance_records_subject_id_fkey"
+            columns: ["subject_id"]
+            isOneToOne: false
+            referencedRelation: "subjects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          academic_year: string | null
+          attendance_threshold: number
+          avatar_url: string | null
+          college: string | null
+          created_at: string
+          email: string | null
+          full_name: string
+          id: string
+          onboarded: boolean
+          program: string | null
+          semester: number | null
+          updated_at: string
+        }
+        Insert: {
+          academic_year?: string | null
+          attendance_threshold?: number
+          avatar_url?: string | null
+          college?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          id: string
+          onboarded?: boolean
+          program?: string | null
+          semester?: number | null
+          updated_at?: string
+        }
+        Update: {
+          academic_year?: string | null
+          attendance_threshold?: number
+          avatar_url?: string | null
+          college?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          id?: string
+          onboarded?: boolean
+          program?: string | null
+          semester?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      subjects: {
+        Row: {
+          code: string | null
+          color: string
+          created_at: string
+          credits: number | null
+          faculty: string | null
+          id: string
+          is_demo: boolean
+          name: string
+          semester: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          code?: string | null
+          color?: string
+          created_at?: string
+          credits?: number | null
+          faculty?: string | null
+          id?: string
+          is_demo?: boolean
+          name: string
+          semester?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          code?: string | null
+          color?: string
+          created_at?: string
+          credits?: number | null
+          faculty?: string | null
+          id?: string
+          is_demo?: boolean
+          name?: string
+          semester?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      tasks: {
+        Row: {
+          category: string | null
+          completed: boolean
+          completed_at: string | null
+          created_at: string
+          description: string | null
+          due_at: string | null
+          id: string
+          is_demo: boolean
+          priority: Database["public"]["Enums"]["priority_level"]
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          category?: string | null
+          completed?: boolean
+          completed_at?: string | null
+          created_at?: string
+          description?: string | null
+          due_at?: string | null
+          id?: string
+          is_demo?: boolean
+          priority?: Database["public"]["Enums"]["priority_level"]
+          title: string
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          category?: string | null
+          completed?: boolean
+          completed_at?: string | null
+          created_at?: string
+          description?: string | null
+          due_at?: string | null
+          id?: string
+          is_demo?: boolean
+          priority?: Database["public"]["Enums"]["priority_level"]
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      timetable_entries: {
+        Row: {
+          created_at: string
+          day_of_week: number
+          end_time: string
+          faculty: string | null
+          id: string
+          is_demo: boolean
+          room: string | null
+          start_time: string
+          subject_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          day_of_week: number
+          end_time: string
+          faculty?: string | null
+          id?: string
+          is_demo?: boolean
+          room?: string | null
+          start_time: string
+          subject_id: string
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          day_of_week?: number
+          end_time?: string
+          faculty?: string | null
+          id?: string
+          is_demo?: boolean
+          room?: string | null
+          start_time?: string
+          subject_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "timetable_entries_subject_id_fkey"
+            columns: ["subject_id"]
+            isOneToOne: false
+            referencedRelation: "subjects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      clear_my_demo_data: { Args: never; Returns: undefined }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      refresh_my_notifications: { Args: never; Returns: number }
+      seed_my_demo_data: { Args: never; Returns: undefined }
     }
     Enums: {
-      [_ in never]: never
+      announcement_category: "college" | "course" | "academic" | "event"
+      app_role: "admin" | "student"
+      assignment_status: "pending" | "submitted" | "completed"
+      attendance_status: "present" | "absent"
+      exam_type: "midterm" | "final" | "quiz" | "practical" | "viva" | "other"
+      priority_level: "low" | "medium" | "high"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +696,13 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      announcement_category: ["college", "course", "academic", "event"],
+      app_role: ["admin", "student"],
+      assignment_status: ["pending", "submitted", "completed"],
+      attendance_status: ["present", "absent"],
+      exam_type: ["midterm", "final", "quiz", "practical", "viva", "other"],
+      priority_level: ["low", "medium", "high"],
+    },
   },
 } as const
