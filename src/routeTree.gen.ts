@@ -15,7 +15,11 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthenticatedAppRouteRouteImport } from './routes/_authenticated/_app/route'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
+import { Route as AuthenticatedAppAssignmentsRouteImport } from './routes/_authenticated/_app/assignments'
+import { Route as AuthenticatedAppAttendanceRouteImport } from './routes/_authenticated/_app/attendance'
 import { Route as AuthenticatedAppDashboardRouteImport } from './routes/_authenticated/_app/dashboard'
+import { Route as AuthenticatedAppExamsRouteImport } from './routes/_authenticated/_app/exams'
+import { Route as AuthenticatedAppTimetableRouteImport } from './routes/_authenticated/_app/timetable'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -45,10 +49,33 @@ const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
   path: '/onboarding',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAppAssignmentsRoute =
+  AuthenticatedAppAssignmentsRouteImport.update({
+    id: '/assignments',
+    path: '/assignments',
+    getParentRoute: () => AuthenticatedAppRouteRoute,
+  } as any)
+const AuthenticatedAppAttendanceRoute =
+  AuthenticatedAppAttendanceRouteImport.update({
+    id: '/attendance',
+    path: '/attendance',
+    getParentRoute: () => AuthenticatedAppRouteRoute,
+  } as any)
 const AuthenticatedAppDashboardRoute =
   AuthenticatedAppDashboardRouteImport.update({
     id: '/dashboard',
     path: '/dashboard',
+    getParentRoute: () => AuthenticatedAppRouteRoute,
+  } as any)
+const AuthenticatedAppExamsRoute = AuthenticatedAppExamsRouteImport.update({
+  id: '/exams',
+  path: '/exams',
+  getParentRoute: () => AuthenticatedAppRouteRoute,
+} as any)
+const AuthenticatedAppTimetableRoute =
+  AuthenticatedAppTimetableRouteImport.update({
+    id: '/timetable',
+    path: '/timetable',
     getParentRoute: () => AuthenticatedAppRouteRoute,
   } as any)
 
@@ -57,14 +84,22 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/assignments': typeof AuthenticatedAppAssignmentsRoute
+  '/attendance': typeof AuthenticatedAppAttendanceRoute
   '/dashboard': typeof AuthenticatedAppDashboardRoute
+  '/exams': typeof AuthenticatedAppExamsRoute
+  '/timetable': typeof AuthenticatedAppTimetableRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/assignments': typeof AuthenticatedAppAssignmentsRoute
+  '/attendance': typeof AuthenticatedAppAttendanceRoute
   '/dashboard': typeof AuthenticatedAppDashboardRoute
+  '/exams': typeof AuthenticatedAppExamsRoute
+  '/timetable': typeof AuthenticatedAppTimetableRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -74,13 +109,35 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/_authenticated/_app': typeof AuthenticatedAppRouteRouteWithChildren
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
+  '/_authenticated/_app/assignments': typeof AuthenticatedAppAssignmentsRoute
+  '/_authenticated/_app/attendance': typeof AuthenticatedAppAttendanceRoute
   '/_authenticated/_app/dashboard': typeof AuthenticatedAppDashboardRoute
+  '/_authenticated/_app/exams': typeof AuthenticatedAppExamsRoute
+  '/_authenticated/_app/timetable': typeof AuthenticatedAppTimetableRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/reset-password' | '/onboarding' | '/dashboard'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/reset-password'
+    | '/onboarding'
+    | '/assignments'
+    | '/attendance'
+    | '/dashboard'
+    | '/exams'
+    | '/timetable'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/reset-password' | '/onboarding' | '/dashboard'
+  to:
+    | '/'
+    | '/auth'
+    | '/reset-password'
+    | '/onboarding'
+    | '/assignments'
+    | '/attendance'
+    | '/dashboard'
+    | '/exams'
+    | '/timetable'
   id:
     | '__root__'
     | '/'
@@ -89,7 +146,11 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/_authenticated/_app'
     | '/_authenticated/onboarding'
+    | '/_authenticated/_app/assignments'
+    | '/_authenticated/_app/attendance'
     | '/_authenticated/_app/dashboard'
+    | '/_authenticated/_app/exams'
+    | '/_authenticated/_app/timetable'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -143,6 +204,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/_app/assignments': {
+      id: '/_authenticated/_app/assignments'
+      path: '/assignments'
+      fullPath: '/assignments'
+      preLoaderRoute: typeof AuthenticatedAppAssignmentsRouteImport
+      parentRoute: typeof AuthenticatedAppRouteRoute
+    }
+    '/_authenticated/_app/attendance': {
+      id: '/_authenticated/_app/attendance'
+      path: '/attendance'
+      fullPath: '/attendance'
+      preLoaderRoute: typeof AuthenticatedAppAttendanceRouteImport
+      parentRoute: typeof AuthenticatedAppRouteRoute
+    }
     '/_authenticated/_app/dashboard': {
       id: '/_authenticated/_app/dashboard'
       path: '/dashboard'
@@ -150,15 +225,37 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppDashboardRouteImport
       parentRoute: typeof AuthenticatedAppRouteRoute
     }
+    '/_authenticated/_app/exams': {
+      id: '/_authenticated/_app/exams'
+      path: '/exams'
+      fullPath: '/exams'
+      preLoaderRoute: typeof AuthenticatedAppExamsRouteImport
+      parentRoute: typeof AuthenticatedAppRouteRoute
+    }
+    '/_authenticated/_app/timetable': {
+      id: '/_authenticated/_app/timetable'
+      path: '/timetable'
+      fullPath: '/timetable'
+      preLoaderRoute: typeof AuthenticatedAppTimetableRouteImport
+      parentRoute: typeof AuthenticatedAppRouteRoute
+    }
   }
 }
 
 interface AuthenticatedAppRouteRouteChildren {
+  AuthenticatedAppAssignmentsRoute: typeof AuthenticatedAppAssignmentsRoute
+  AuthenticatedAppAttendanceRoute: typeof AuthenticatedAppAttendanceRoute
   AuthenticatedAppDashboardRoute: typeof AuthenticatedAppDashboardRoute
+  AuthenticatedAppExamsRoute: typeof AuthenticatedAppExamsRoute
+  AuthenticatedAppTimetableRoute: typeof AuthenticatedAppTimetableRoute
 }
 
 const AuthenticatedAppRouteRouteChildren: AuthenticatedAppRouteRouteChildren = {
+  AuthenticatedAppAssignmentsRoute: AuthenticatedAppAssignmentsRoute,
+  AuthenticatedAppAttendanceRoute: AuthenticatedAppAttendanceRoute,
   AuthenticatedAppDashboardRoute: AuthenticatedAppDashboardRoute,
+  AuthenticatedAppExamsRoute: AuthenticatedAppExamsRoute,
+  AuthenticatedAppTimetableRoute: AuthenticatedAppTimetableRoute,
 }
 
 const AuthenticatedAppRouteRouteWithChildren =
