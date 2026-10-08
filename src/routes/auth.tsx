@@ -14,9 +14,8 @@ import { emailSchema, passwordSchema } from "@/lib/validations";
 type Mode = "login" | "signup" | "forgot";
 
 export const Route = createFileRoute("/auth")({
-  validateSearch: (s: Record<string, unknown>) => ({
-    mode: (["login", "signup", "forgot"].includes(s.mode as string) ? s.mode : undefined) as Mode | undefined,
-  }),
+  validateSearch: (s: Record<string, unknown>): { mode?: Mode } =>
+    ["login", "signup", "forgot"].includes(s.mode as string) ? { mode: s.mode as Mode } : {},
   head: () => ({
     meta: [
       { title: "Sign in — CampusFlow" },
