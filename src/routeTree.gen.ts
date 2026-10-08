@@ -15,11 +15,14 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthenticatedAppRouteRouteImport } from './routes/_authenticated/_app/route'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
+import { Route as AuthenticatedAppAnnouncementsRouteImport } from './routes/_authenticated/_app/announcements'
 import { Route as AuthenticatedAppAssignmentsRouteImport } from './routes/_authenticated/_app/assignments'
 import { Route as AuthenticatedAppAttendanceRouteImport } from './routes/_authenticated/_app/attendance'
 import { Route as AuthenticatedAppDashboardRouteImport } from './routes/_authenticated/_app/dashboard'
 import { Route as AuthenticatedAppExamsRouteImport } from './routes/_authenticated/_app/exams'
 import { Route as AuthenticatedAppNotesRouteImport } from './routes/_authenticated/_app/notes'
+import { Route as AuthenticatedAppPerformanceRouteImport } from './routes/_authenticated/_app/performance'
+import { Route as AuthenticatedAppSettingsRouteImport } from './routes/_authenticated/_app/settings'
 import { Route as AuthenticatedAppTasksRouteImport } from './routes/_authenticated/_app/tasks'
 import { Route as AuthenticatedAppTimetableRouteImport } from './routes/_authenticated/_app/timetable'
 import { Route as AuthenticatedAppSubjectsIndexRouteImport } from './routes/_authenticated/_app/subjects.index'
@@ -53,6 +56,12 @@ const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
   path: '/onboarding',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAppAnnouncementsRoute =
+  AuthenticatedAppAnnouncementsRouteImport.update({
+    id: '/announcements',
+    path: '/announcements',
+    getParentRoute: () => AuthenticatedAppRouteRoute,
+  } as any)
 const AuthenticatedAppAssignmentsRoute =
   AuthenticatedAppAssignmentsRouteImport.update({
     id: '/assignments',
@@ -81,6 +90,18 @@ const AuthenticatedAppNotesRoute = AuthenticatedAppNotesRouteImport.update({
   path: '/notes',
   getParentRoute: () => AuthenticatedAppRouteRoute,
 } as any)
+const AuthenticatedAppPerformanceRoute =
+  AuthenticatedAppPerformanceRouteImport.update({
+    id: '/performance',
+    path: '/performance',
+    getParentRoute: () => AuthenticatedAppRouteRoute,
+  } as any)
+const AuthenticatedAppSettingsRoute =
+  AuthenticatedAppSettingsRouteImport.update({
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => AuthenticatedAppRouteRoute,
+  } as any)
 const AuthenticatedAppTasksRoute = AuthenticatedAppTasksRouteImport.update({
   id: '/tasks',
   path: '/tasks',
@@ -110,11 +131,14 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/announcements': typeof AuthenticatedAppAnnouncementsRoute
   '/assignments': typeof AuthenticatedAppAssignmentsRoute
   '/attendance': typeof AuthenticatedAppAttendanceRoute
   '/dashboard': typeof AuthenticatedAppDashboardRoute
   '/exams': typeof AuthenticatedAppExamsRoute
   '/notes': typeof AuthenticatedAppNotesRoute
+  '/performance': typeof AuthenticatedAppPerformanceRoute
+  '/settings': typeof AuthenticatedAppSettingsRoute
   '/tasks': typeof AuthenticatedAppTasksRoute
   '/timetable': typeof AuthenticatedAppTimetableRoute
   '/subjects/$subjectId': typeof AuthenticatedAppSubjectsSubjectIdRoute
@@ -125,11 +149,14 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/announcements': typeof AuthenticatedAppAnnouncementsRoute
   '/assignments': typeof AuthenticatedAppAssignmentsRoute
   '/attendance': typeof AuthenticatedAppAttendanceRoute
   '/dashboard': typeof AuthenticatedAppDashboardRoute
   '/exams': typeof AuthenticatedAppExamsRoute
   '/notes': typeof AuthenticatedAppNotesRoute
+  '/performance': typeof AuthenticatedAppPerformanceRoute
+  '/settings': typeof AuthenticatedAppSettingsRoute
   '/tasks': typeof AuthenticatedAppTasksRoute
   '/timetable': typeof AuthenticatedAppTimetableRoute
   '/subjects/$subjectId': typeof AuthenticatedAppSubjectsSubjectIdRoute
@@ -143,11 +170,14 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/_authenticated/_app': typeof AuthenticatedAppRouteRouteWithChildren
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
+  '/_authenticated/_app/announcements': typeof AuthenticatedAppAnnouncementsRoute
   '/_authenticated/_app/assignments': typeof AuthenticatedAppAssignmentsRoute
   '/_authenticated/_app/attendance': typeof AuthenticatedAppAttendanceRoute
   '/_authenticated/_app/dashboard': typeof AuthenticatedAppDashboardRoute
   '/_authenticated/_app/exams': typeof AuthenticatedAppExamsRoute
   '/_authenticated/_app/notes': typeof AuthenticatedAppNotesRoute
+  '/_authenticated/_app/performance': typeof AuthenticatedAppPerformanceRoute
+  '/_authenticated/_app/settings': typeof AuthenticatedAppSettingsRoute
   '/_authenticated/_app/tasks': typeof AuthenticatedAppTasksRoute
   '/_authenticated/_app/timetable': typeof AuthenticatedAppTimetableRoute
   '/_authenticated/_app/subjects/$subjectId': typeof AuthenticatedAppSubjectsSubjectIdRoute
@@ -160,11 +190,14 @@ export interface FileRouteTypes {
     | '/auth'
     | '/reset-password'
     | '/onboarding'
+    | '/announcements'
     | '/assignments'
     | '/attendance'
     | '/dashboard'
     | '/exams'
     | '/notes'
+    | '/performance'
+    | '/settings'
     | '/tasks'
     | '/timetable'
     | '/subjects/$subjectId'
@@ -175,11 +208,14 @@ export interface FileRouteTypes {
     | '/auth'
     | '/reset-password'
     | '/onboarding'
+    | '/announcements'
     | '/assignments'
     | '/attendance'
     | '/dashboard'
     | '/exams'
     | '/notes'
+    | '/performance'
+    | '/settings'
     | '/tasks'
     | '/timetable'
     | '/subjects/$subjectId'
@@ -192,11 +228,14 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/_authenticated/_app'
     | '/_authenticated/onboarding'
+    | '/_authenticated/_app/announcements'
     | '/_authenticated/_app/assignments'
     | '/_authenticated/_app/attendance'
     | '/_authenticated/_app/dashboard'
     | '/_authenticated/_app/exams'
     | '/_authenticated/_app/notes'
+    | '/_authenticated/_app/performance'
+    | '/_authenticated/_app/settings'
     | '/_authenticated/_app/tasks'
     | '/_authenticated/_app/timetable'
     | '/_authenticated/_app/subjects/$subjectId'
@@ -254,6 +293,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/_app/announcements': {
+      id: '/_authenticated/_app/announcements'
+      path: '/announcements'
+      fullPath: '/announcements'
+      preLoaderRoute: typeof AuthenticatedAppAnnouncementsRouteImport
+      parentRoute: typeof AuthenticatedAppRouteRoute
+    }
     '/_authenticated/_app/assignments': {
       id: '/_authenticated/_app/assignments'
       path: '/assignments'
@@ -289,6 +335,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppNotesRouteImport
       parentRoute: typeof AuthenticatedAppRouteRoute
     }
+    '/_authenticated/_app/performance': {
+      id: '/_authenticated/_app/performance'
+      path: '/performance'
+      fullPath: '/performance'
+      preLoaderRoute: typeof AuthenticatedAppPerformanceRouteImport
+      parentRoute: typeof AuthenticatedAppRouteRoute
+    }
+    '/_authenticated/_app/settings': {
+      id: '/_authenticated/_app/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedAppSettingsRouteImport
+      parentRoute: typeof AuthenticatedAppRouteRoute
+    }
     '/_authenticated/_app/tasks': {
       id: '/_authenticated/_app/tasks'
       path: '/tasks'
@@ -321,11 +381,14 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedAppRouteRouteChildren {
+  AuthenticatedAppAnnouncementsRoute: typeof AuthenticatedAppAnnouncementsRoute
   AuthenticatedAppAssignmentsRoute: typeof AuthenticatedAppAssignmentsRoute
   AuthenticatedAppAttendanceRoute: typeof AuthenticatedAppAttendanceRoute
   AuthenticatedAppDashboardRoute: typeof AuthenticatedAppDashboardRoute
   AuthenticatedAppExamsRoute: typeof AuthenticatedAppExamsRoute
   AuthenticatedAppNotesRoute: typeof AuthenticatedAppNotesRoute
+  AuthenticatedAppPerformanceRoute: typeof AuthenticatedAppPerformanceRoute
+  AuthenticatedAppSettingsRoute: typeof AuthenticatedAppSettingsRoute
   AuthenticatedAppTasksRoute: typeof AuthenticatedAppTasksRoute
   AuthenticatedAppTimetableRoute: typeof AuthenticatedAppTimetableRoute
   AuthenticatedAppSubjectsSubjectIdRoute: typeof AuthenticatedAppSubjectsSubjectIdRoute
@@ -333,11 +396,14 @@ interface AuthenticatedAppRouteRouteChildren {
 }
 
 const AuthenticatedAppRouteRouteChildren: AuthenticatedAppRouteRouteChildren = {
+  AuthenticatedAppAnnouncementsRoute: AuthenticatedAppAnnouncementsRoute,
   AuthenticatedAppAssignmentsRoute: AuthenticatedAppAssignmentsRoute,
   AuthenticatedAppAttendanceRoute: AuthenticatedAppAttendanceRoute,
   AuthenticatedAppDashboardRoute: AuthenticatedAppDashboardRoute,
   AuthenticatedAppExamsRoute: AuthenticatedAppExamsRoute,
   AuthenticatedAppNotesRoute: AuthenticatedAppNotesRoute,
+  AuthenticatedAppPerformanceRoute: AuthenticatedAppPerformanceRoute,
+  AuthenticatedAppSettingsRoute: AuthenticatedAppSettingsRoute,
   AuthenticatedAppTasksRoute: AuthenticatedAppTasksRoute,
   AuthenticatedAppTimetableRoute: AuthenticatedAppTimetableRoute,
   AuthenticatedAppSubjectsSubjectIdRoute:
